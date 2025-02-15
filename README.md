@@ -1,58 +1,58 @@
 # mkdocs-document-dates
 
-[English](README_en.md) | 简体中文
+English | [简体中文](README_zh.md)
 
 
 
-一个用于显示**准确的**文档创建日期和最后修改日期的 MkDocs 插件。
+A MkDocs plugin for displaying **accurate** document creation and last modification dates.
 
-## 特性
+## Features
 
-- 自动显示文档的创建时间和最后修改时间
-- 支持在 `Front Matter` 中手动指定日期
-- 不依赖 Git，直接使用文件系统的时间戳
-- 跨平台支持（Windows、macOS、Linux）
-- 可配置的日期和时间格式
-- 灵活的显示位置（顶部或底部）
-- 支持文件排除规则
-- Material Design 风格的图标
-- 优雅的样式设计
-- 轻量级，无额外依赖
+- Automatically displays document creation and last modification times
+- Supports manual date specification in `Front Matter`
+- No Git dependency, uses filesystem timestamps directly
+- Cross-platform support (Windows, macOS, Linux)
+- Configurable date and time formats
+- Flexible display position (top or bottom)
+- File exclusion rules support
+- Material Design icons
+- Elegant styling
+- Lightweight with no extra dependencies
 
-## 安装
+## Installation
 
 ```bash
 pip install mkdocs-document-dates
 ```
 
-## 配置
+## Configuration
 
-在你的 mkdocs.yml 中添加插件即可：
+Add the plugin to your mkdocs.yml:
 
 ```yaml
 plugins:
   - document-dates
 ```
 
-或者，你要自定义配置：
+Or, customize the configuration:
 
 ```yaml
 plugins:
   - document-dates:
-      date_format: '%Y-%m-%d'    # 日期格式
-      show_time: false           # 是否显示时间
-      time_format: '%H:%M:%S'    # 时间格式
-      position: bottom           # 显示位置：top（标题后）或 bottom（文档末尾）
-      exclude:                   # 排除的文件模式列表
-        - "private/*"            # 排除 private 目录下的所有文件
-        - "drafts/*.md"         # 排除 drafts 目录下的所有 markdown 文件
-        - "temp.md"             # 排除特定文件
-        - "*.tmp"               # 排除所有 .tmp 后缀的文件
+      date_format: '%Y-%m-%d'    # Date format
+      show_time: false           # Whether to show time
+      time_format: '%H:%M:%S'    # Time format
+      position: bottom           # Display position: top (after title) or bottom (end of document)
+      exclude:                   # List of file patterns to exclude
+        - "private/*"            # Exclude all files in private directory
+        - "drafts/*.md"         # Exclude all markdown files in drafts directory
+        - "temp.md"             # Exclude specific file
+        - "*.tmp"               # Exclude all files with .tmp extension
 ```
 
-## 手动指定日期
+## Manual Date Specification
 
-你也可以在 Markdown 文档的 `Front Matter` 中手动指定该文档的日期：
+You can also manually specify the date of a Markdown document in its `Front Matter` :
 
 ```yaml
 ---
@@ -60,29 +60,29 @@ created_date: 2023-01-01
 modified_date: 2023-12-31
 ---
 
-# 文档标题
+# Document Title
 ```
 
-## 配置选项
+## Configuration Options
 
-- `date_format`: 日期格式（默认：%Y-%m-%d）
-  - 支持所有 Python datetime 格式化字符串，例如：%Y年%m月%d日、%b %d, %Y 等
-- `show_time`: 是否显示时间（默认：false）
-  - true: 同时显示日期和时间
-  - false: 仅显示日期
-- `time_format`: 时间格式（默认：%H:%M:%S）
-  - 仅在 show_time 为 true 时生效
-- `position`: 显示位置（默认：bottom）
-  - top: 在文档第一个标题后显示
-  - bottom: 在文档末尾显示
-- `exclude`: 排除文件列表（默认：[]）
-  - 支持 glob 模式，例如：["private/*", "temp.md"]
+- `date_format`: Date format (default: %Y-%m-%d)
+  - Supports all Python datetime format strings, examples: %Y-%m-%d, %b %d, %Y, etc.
+- `show_time`: Whether to show time (default: false)
+  - true: Show both date and time
+  - false: Show date only
+- `time_format`: Time format (default: %H:%M:%S)
+  - Only effective when show_time is true
+- `position`: Display position (default: bottom)
+  - top: Display after the first heading
+  - bottom: Display at the end of document
+- `exclude`: List of files to exclude (default: [])
+  - Supports glob patterns, example: ["private/*", "temp.md"]
 
-## 注意事项
+## Notes
 
-- 创建时间在不同操作系统上的行为可能不同：
-  - Windows: 使用文件创建时间
-  - macOS: 使用文件创建时间（birthtime）
-  - Linux: 由于系统限制，使用修改时间作为创建时间
-- 如果需要准确的创建时间，建议使用 Front Matter 手动指定
+- Creation time behavior varies across operating systems:
+  - Windows: Uses file creation time
+  - macOS: Uses file creation time (birthtime)
+  - Linux: Uses modification time as creation time due to system limitations
+- For accurate creation times, it's recommended to use Front Matter for manual specification
 
