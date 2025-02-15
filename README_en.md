@@ -66,8 +66,7 @@ modified_date: '2023-12-31'
 ## Configuration Options
 
 - date_format: Date format (default: %Y-%m-%d)
-  - Supports all Python datetime format strings
-  - Examples: %Y-%m-%d, %b %d, %Y, etc.
+  - Supports all Python datetime format strings, examples: %Y-%m-%d, %b %d, %Y, etc.
 - show_time: Whether to show time (default: false)
   - true: Show both date and time
   - false: Show date only
@@ -77,8 +76,7 @@ modified_date: '2023-12-31'
   - top: Display after the first heading
   - bottom: Display at the end of document
 - exclude: List of files to exclude (default: [])
-  - Supports glob patterns
-  - Example: ["private/*", "temp.md"]
+  - Supports glob patterns, example: ["private/*", "temp.md"]
 
 ## Notes
 
