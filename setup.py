@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="mkdocs-document-dates",
-    version="0.1.0",
+    version="0.2.0",
     author="Aaron Wang",
     description="一个用于显示文档创建日期和最后修改日期的 MkDocs 插件",
     long_description=long_description,
