@@ -56,8 +56,8 @@ plugins:
 
 ```yaml
 ---
-created_date: '2023-01-01'
-modified_date: '2023-12-31'
+created_date: 2023-01-01
+modified_date: 2023-12-31
 ---
 
 # 文档标题

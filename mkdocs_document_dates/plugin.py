@@ -103,9 +103,20 @@ class DocumentDatesPlugin(BasePlugin):
         # 检查 frontmatter 中的日期
         meta = getattr(page, 'meta', {})
         if 'created_date' in meta:
-            created = datetime.fromisoformat(meta['created_date'])
+            try:
+                date_str = str(meta['created_date']).strip("'\"")  # 移除可能存在的引号
+                created = datetime.fromisoformat(date_str)
+            except (ValueError, TypeError):
+                # 如果解析失败，保持原有的文件系统日期
+                pass
+                
         if 'modified_date' in meta:
-            modified = datetime.fromisoformat(meta['modified_date'])
+            try:
+                date_str = str(meta['modified_date']).strip("'\"")  # 移除可能存在的引号
+                modified = datetime.fromisoformat(date_str)
+            except (ValueError, TypeError):
+                # 如果解析失败，保持原有的文件系统日期
+                pass
         
         # 格式化并插入日期信息
         date_info = self.format_date_info(created, modified)
