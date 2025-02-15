@@ -4,7 +4,7 @@
 
 
 
-一个用于显示准确的文档创建日期和最后修改日期的 MkDocs 插件。
+一个用于显示**准确的**文档创建日期和最后修改日期的 MkDocs 插件。
 
 ## 特性
 
@@ -52,7 +52,7 @@ plugins:
 
 ## 手动指定日期
 
-你也可以为 Markdown 文档手动指定日期，在 Markdown 文档的 `Front Matter` 中设置：
+你也可以在 Markdown 文档的 `Front Matter` 中手动指定该文档的日期：
 
 ```yaml
 ---
@@ -65,17 +65,17 @@ modified_date: 2023-12-31
 
 ## 配置选项
 
-- date_format: 日期格式（默认：%Y-%m-%d）
+- `date_format`: 日期格式（默认：%Y-%m-%d）
   - 支持所有 Python datetime 格式化字符串，例如：%Y年%m月%d日、%b %d, %Y 等
-- show_time: 是否显示时间（默认：false）
+- `show_time`: 是否显示时间（默认：false）
   - true: 同时显示日期和时间
   - false: 仅显示日期
-- time_format: 时间格式（默认：%H:%M:%S）
+- `time_format`: 时间格式（默认：%H:%M:%S）
   - 仅在 show_time 为 true 时生效
-- position: 显示位置（默认：bottom）
+- `position`: 显示位置（默认：bottom）
   - top: 在文档第一个标题后显示
   - bottom: 在文档末尾显示
-- exclude: 排除文件列表（默认：[]）
+- `exclude`: 排除文件列表（默认：[]）
   - 支持 glob 模式，例如：["private/*", "temp.md"]
 
 ## 注意事项

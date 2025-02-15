@@ -1,4 +1,5 @@
 import os
+import platform
 from datetime import datetime
 from pathlib import Path
 from mkdocs.plugins import BasePlugin
@@ -124,7 +125,6 @@ class DocumentDatesPlugin(BasePlugin):
 
     def get_file_dates(self, file_path):
         """获取文件的创建时间和修改时间"""
-        import platform
         
         stat = os.stat(file_path)
         modified = datetime.fromtimestamp(stat.st_mtime)

@@ -4,7 +4,7 @@
 
 
 
-A MkDocs plugin for displaying accurate document creation and last modification dates.
+A MkDocs plugin for displaying **accurate** document creation and last modification dates.
 
 ## Features
 
@@ -52,7 +52,7 @@ plugins:
 
 ## Manual Date Specification
 
-You can also specify the date manually for a Markdown document, by setting it in the `Front Matter` of your Markdown files:
+You can also manually specify the date of a Markdown document in its `Front Matter` :
 
 ```yaml
 ---
@@ -65,17 +65,17 @@ modified_date: 2023-12-31
 
 ## Configuration Options
 
-- date_format: Date format (default: %Y-%m-%d)
+- `date_format`: Date format (default: %Y-%m-%d)
   - Supports all Python datetime format strings, examples: %Y-%m-%d, %b %d, %Y, etc.
-- show_time: Whether to show time (default: false)
+- `show_time`: Whether to show time (default: false)
   - true: Show both date and time
   - false: Show date only
-- time_format: Time format (default: %H:%M:%S)
+- `time_format`: Time format (default: %H:%M:%S)
   - Only effective when show_time is true
-- position: Display position (default: bottom)
+- `position`: Display position (default: bottom)
   - top: Display after the first heading
   - bottom: Display at the end of document
-- exclude: List of files to exclude (default: [])
+- `exclude`: List of files to exclude (default: [])
   - Supports glob patterns, example: ["private/*", "temp.md"]
 
 ## Notes
