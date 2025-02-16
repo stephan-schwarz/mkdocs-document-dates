@@ -27,7 +27,7 @@ pip install mkdocs-document-dates
 
 ## Configuration
 
-Add the plugin to your mkdocs.yml:
+Just add the plugin to your mkdocs.yml:
 
 ```yaml
 plugins:
