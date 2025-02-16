@@ -44,7 +44,7 @@ plugins:
       time_format: '%H:%M:%S'    # 时间格式
       position: bottom           # 显示位置：top（标题后）或 bottom（文档末尾）
       exclude:                   # 排除的文件模式列表
-        - "private/*"            # 排除 private 目录下的所有文件
+        - "private/*"            # 排除 private 目录下的所有文件，包括子目录
         - "drafts/*.md"         # 排除 drafts 目录下的所有 markdown 文件
         - "temp.md"             # 排除特定文件
         - "*.tmp"               # 排除所有 .tmp 后缀的文件

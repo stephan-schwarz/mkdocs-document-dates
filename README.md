@@ -44,7 +44,7 @@ plugins:
       time_format: '%H:%M:%S'    # Time format
       position: bottom           # Display position: top (after title) or bottom (end of document)
       exclude:                   # List of file patterns to exclude
-        - "private/*"            # Exclude all files in private directory
+        - "private/*"            # Exclude all files in private directory, including subdirectories
         - "drafts/*.md"         # Exclude all markdown files in drafts directory
         - "temp.md"             # Exclude specific file
         - "*.tmp"               # Exclude all files with .tmp extension

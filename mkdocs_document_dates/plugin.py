@@ -91,11 +91,36 @@ class DocumentDatesPlugin(BasePlugin):
 
     def on_page_markdown(self, markdown, page, config, files):
         """处理页面内容，添加日期信息"""
-        file_path = page.file.abs_src_path
+        file_path = Path(page.file.abs_src_path)
+        docs_dir = Path(config['docs_dir'])
         
         # 检查是否在排除列表中
         for exclude_pattern in self.config['exclude']:
-            if Path(file_path).match(exclude_pattern):
+            # 处理目录递归排除（如 private/*）
+            if exclude_pattern.endswith('/*'):
+                base_dir = exclude_pattern[:-2]  # 移除 /*
+                try:
+                    # 检查当前文件是否在指定目录或其子目录中
+                    rel_path = file_path.relative_to(docs_dir)
+                    if str(rel_path).startswith(f"{base_dir}/"):
+                        return markdown
+                except ValueError:
+                    continue
+            
+            # 处理特定目录下的特定类型文件（如 drafts/*.md）
+            elif '/*.' in exclude_pattern:
+                dir_part, ext_part = exclude_pattern.split('/*.')
+                if (file_path.parent.name == dir_part and 
+                    file_path.suffix == f".{ext_part}"):
+                    return markdown
+            
+            # 处理特定后缀文件（如 *.tmp）
+            elif exclude_pattern.startswith('*.'):
+                if file_path.suffix == f".{exclude_pattern[2:]}":
+                    return markdown
+            
+            # 处理精确文件匹配（如 temp.md）
+            elif file_path.name == exclude_pattern:
                 return markdown
         
         # 直接获取日期信息
