@@ -9,8 +9,8 @@ A MkDocs plugin for displaying **accurate** document creation and last modificat
 ## Features
 
 - Automatically displays document creation and last modification times
-- Supports manual date specification in `Front Matter`
 - No Git dependency, uses filesystem timestamps directly
+- Supports manual date specification in `Front Matter`
 - Cross-platform support (Windows, macOS, Linux)
 - Configurable date and time formats
 - Flexible display position (top or bottom)
