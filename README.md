@@ -12,12 +12,12 @@ A MkDocs plugin for displaying **accurate** document creation and last modificat
 - No Git dependency, uses filesystem timestamps directly
 - Supports manual date specification in `Front Matter`
 - Cross-platform support (Windows, macOS, Linux)
-- Configurable date and time formats
+- Configurable time display formats (supports date, time, and relative time)
 - Flexible display position (top or bottom)
 - File exclusion rules support
-- Material Design icons
-- Elegant styling
+- Material Design icons, Elegant styling
 - Lightweight with no extra dependencies
+- Multi-language support
 
 ## Installation
 
@@ -39,15 +39,15 @@ Or, customize the configuration:
 ```yaml
 plugins:
   - document-dates:
-      date_format: '%Y-%m-%d'    # Date format
-      show_time: false           # Whether to show time
-      time_format: '%H:%M:%S'    # Time format
-      position: bottom           # Display position: top (after title) or bottom (end of document)
-      exclude:                   # List of file patterns to exclude
-        - "private/*"            # Exclude all files in private directory, including subdirectories
-        - "drafts/*.md"         # Exclude all markdown files in drafts directory
-        - "temp.md"             # Exclude specific file
-        - "*.tmp"               # Exclude all files with .tmp extension
+      type: date               # Date type: date | datetime | timeago, default: date
+      locale: en               # Localization: zh zh_tw en es fr de ar ja ko ru, default: en
+      date_format: '%Y-%m-%d'  # Date format
+      time_format: '%H:%M:%S'  # Time format
+      position: bottom         # Display position: top (after title) | bottom (end of document), default: bottom
+      exclude:                 # List of file patterns to exclude
+        - temp.md              # Exclude specific file
+        - private/*            # Exclude all files in private directory, including subdirectories
+        - drafts/*.md          # Exclude all markdown files in the current directory drafts, but not subdirectories
 ```
 
 ## Manual Date Specification
@@ -63,20 +63,24 @@ modified_date: 2023-12-31
 # Document Title
 ```
 
+
+
 ## Configuration Options
 
-- `date_format`: Date format (default: %Y-%m-%d)
-  - Supports all Python datetime format strings, examples: %Y-%m-%d, %b %d, %Y, etc.
-- `show_time`: Whether to show time (default: false)
-  - true: Show both date and time
-  - false: Show date only
-- `time_format`: Time format (default: %H:%M:%S)
-  - Only effective when show_time is true
-- `position`: Display position (default: bottom)
-  - top: Display after the first heading
-  - bottom: Display at the end of document
-- `exclude`: List of files to exclude (default: [])
-  - Supports glob patterns, example: ["private/*", "temp.md"]
+- `type` : Date type (default: `date` )
+  - `date` : Display date only
+  - `datetime` : Display date and time
+  - `timeago` : Display relative time (e.g., 2 minutes ago)
+- `locale` : Localization (default: `en` )
+  - Supports: `zh zh_tw en es fr de ar ja ko ru`
+- `date_format` : Date format (default: `%Y-%m-%d`)
+  - Supports all Python datetime format strings, e.g., %Y-%m-%d, %b %d, %Y, etc.
+- `time_format` : Time format (default: `%H:%M:%S`)
+- `position` : Display position (default: `bottom`)
+  - `top` : Display after the first heading
+  - `bottom` : Display at the end of the document
+- `exclude` : File exclusion list (default: [] )
+  - Supports glob patterns, e.g., ["private/\*", "temp.md", "drafts/\*.md"]
 
 ## Notes
 
@@ -84,5 +88,5 @@ modified_date: 2023-12-31
   - Windows: Uses file creation time
   - macOS: Uses file creation time (birthtime)
   - Linux: Uses modification time as creation time due to system limitations
-- For accurate creation times, it's recommended to use Front Matter for manual specification
+- For accurate creation times, it's recommended to specify dates manually in Front Matter
 

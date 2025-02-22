@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="mkdocs-document-dates",
-    version="0.4.0",
+    version="0.5.0",
     author="Aaron Wang",
     description="A MkDocs plugin for displaying accurate document creation and last modification dates.",
     long_description=long_description,
