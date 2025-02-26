@@ -1,4 +1,5 @@
 import os
+import json
 import platform
 from datetime import datetime
 from pathlib import Path
@@ -83,10 +84,16 @@ class DocumentDatesPlugin(BasePlugin):
         if self._is_excluded(file_path, Path(config['docs_dir'])):
             return markdown
         
-        created, modified = self._get_file_dates(file_path)
+        # 获取文件时间
+        created, modified = self._get_file_dates(file_path, config)
+        
+        # 处理 front matter 中的时间
         created, modified = self._process_meta_dates(page.meta, created, modified)
         
+        # 生成日期信息 HTML
         date_info = self._get_date_info(created, modified)
+        
+        # 将日期信息写入 markdown
         return self._insert_date_info(markdown, date_info)
 
     def _is_excluded(self, file_path: Path, docs_dir: Path) -> bool:
@@ -130,8 +137,8 @@ class DocumentDatesPlugin(BasePlugin):
 
     def _process_meta_dates(self, meta: dict, created: datetime, modified: datetime) -> tuple[datetime, datetime]:
         """处理 frontmatter 中的日期"""
-        result_created = self._parse_meta_date(meta.get('created_date'), created)
-        result_modified = self._parse_meta_date(meta.get('modified_date'), modified)
+        result_created = self._parse_meta_date(meta.get('created'), created)
+        result_modified = self._parse_meta_date(meta.get('modified'), modified)
         return result_created, result_modified
 
     def _parse_meta_date(self, date_str: str | None, default_date: datetime) -> datetime:
@@ -144,12 +151,27 @@ class DocumentDatesPlugin(BasePlugin):
         except (ValueError, TypeError):
             return default_date
 
-    def _get_file_dates(self, file_path):
+    def _get_file_dates(self, file_path, config):
         """获取文件的创建时间和修改时间"""
         try:
+            docs_dir = Path(config['docs_dir'])
+            rel_path = str(Path(file_path).relative_to(docs_dir))
+            
+            # 尝试从缓存文件读取时间信息
+            cache_file = docs_dir / '.dates_cache.json'
+            if cache_file.exists():
+                with open(cache_file) as f:
+                    dates_cache = json.load(f)
+                    if rel_path in dates_cache:
+                        return (
+                            datetime.fromisoformat(dates_cache[rel_path]['created']),
+                            datetime.fromisoformat(dates_cache[rel_path]['modified'])
+                        )
+            
+            # 如果缓存不存在或文件不在缓存中，使用文件系统时间
             stat = os.stat(file_path)
             modified = datetime.fromtimestamp(stat.st_mtime)
-
+            
             system = platform.system().lower()
             if system == 'darwin':  # macOS
                 try:
@@ -159,12 +181,11 @@ class DocumentDatesPlugin(BasePlugin):
             elif system == 'windows':  # Windows
                 created = datetime.fromtimestamp(stat.st_ctime)
             else:  # Linux 和其他系统
-                # Linux 没有可靠的创建时间，使用修改时间作为创建时间
                 created = modified
 
             return created, modified
-        except (OSError, ValueError) as e:
-            # 添加错误处理，确保即使文件访问出错也能正常工作
+                
+        except (OSError, ValueError, json.JSONDecodeError) as e:
             current_time = datetime.now()
             return current_time, current_time
 
