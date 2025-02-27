@@ -94,4 +94,6 @@ modified: 2025-02-23
       - run: pip install mkdocs-document-dates
       - run: mkdocs gh-deploy --force
     ```
+- Priority of time reads:
+  - `Front Matter` > `Cache file` > `Filesystem timestamp`
 - If you are using MkDocs on a Linux system, the modification time is used as the creation time because of system limitations. If you need the exact creation time, you can specify it manually in Front Matter
