@@ -4,12 +4,12 @@ English | [简体中文](README_zh.md)
 
 
 
-A MkDocs plugin for displaying **accurate** document creation and last modification dates.
+A MkDocs plugin for displaying <mark>accurate</mark> document creation and last modification dates.
 
 ## Features
 
 - Automatically displays document creation and last modification times
-- No Git dependency, uses filesystem timestamps directly
+- **No Git dependency**, uses filesystem timestamps directly
 - Supports manual date specification in `Front Matter`
 - Cross-platform support (Windows, macOS, Linux)
 - Support for multiple time formats (date, datetime, timeago)
@@ -18,6 +18,7 @@ A MkDocs plugin for displaying **accurate** document creation and last modificat
 - Material Design icons, Elegant styling
 - Lightweight with no extra dependencies
 - Multi-language support
+- Support for CI/CD build systems (e.g. Github Actions)
 
 ## Installation
 
@@ -57,7 +58,7 @@ You can also manually specify the date of a Markdown document in its `Front Matt
 ```yaml
 ---
 created: 2023-01-01
-modified: 2023-12-31
+modified: 2025-02-23
 ---
 
 # Document Title
@@ -67,27 +68,23 @@ modified: 2023-12-31
 
 ## Configuration Options
 
-- `type` : Date type (default: `date` )
+- **type** : Date type (default: `date` )
   - `date` : Display date only
   - `datetime` : Display date and time
   - `timeago` : Display relative time (e.g., 2 minutes ago)
-- `locale` : Localization (default: `en` )
+- **locale** : Localization (default: `en` )
   - Supports: `zh zh_tw en es fr de ar ja ko ru`
-- `date_format` : Date format (default: `%Y-%m-%d`)
+- **date_format** : Date format (default: `%Y-%m-%d`)
   - Supports all Python datetime format strings, e.g., %Y-%m-%d, %b %d, %Y, etc.
-- `time_format` : Time format (default: `%H:%M:%S`)
-- `position` : Display position (default: `bottom`)
+- **time_format** : Time format (default: `%H:%M:%S`)
+- **position** : Display position (default: `bottom`)
   - `top` : Display after the first heading
   - `bottom` : Display at the end of the document
-- `exclude` : File exclusion list (default: [] )
+- **exclude** : File exclusion list (default: [] )
   - Supports glob patterns, e.g., ["private/\*", "temp.md", "drafts/\*.md"]
 
 ## Notes
 
-- Creation time behavior varies across operating systems:
-  - Windows: Uses file creation time
-  - macOS: Uses file creation time (birthtime)
-  - Linux: Uses modification time as creation time due to system limitations, if you need the exact creation time, you can manually specify it in Front Matter
 - It still works when using CI/CD build systems (e.g. Github Actions)
   - Used a cache file `.dates_cache.json` to solve this problem
   - You can configure it like this:
@@ -96,4 +93,5 @@ modified: 2023-12-31
     
       - run: pip install mkdocs-document-dates
       - run: mkdocs gh-deploy --force
-    ```  
+    ```
+- If you are using MkDocs on a Linux system, the modification time is used as the creation time because of system limitations. If you need the exact creation time, you can specify it manually in Front Matter

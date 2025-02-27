@@ -4,12 +4,12 @@
 
 
 
-一个用于显示**准确的**文档创建日期和最后修改日期的 MkDocs 插件。
+一个用于显示<mark>准确的</mark>文档创建日期和最后修改日期的 MkDocs 插件。
 
 ## 特性
 
 - 自动显示文档的创建时间和最后修改时间
-- 不依赖 Git，直接使用文件系统的时间戳
+- **不依赖 Git**，直接使用文件系统的时间戳
 - 支持在 `Front Matter` 中手动指定日期
 - 跨平台支持（Windows、macOS、Linux）
 - 支持多种时间格式（date、datetime、timeago）
@@ -18,6 +18,7 @@
 - Material Design 风格的图标，优雅的样式设计
 - 轻量级，无额外依赖
 - 多语言支持
+- 支持 CI/CD 构建系统（如 Github Actions）
 
 ## 安装
 
@@ -57,7 +58,7 @@ plugins:
 ```yaml
 ---
 created: 2023-01-01
-modified: 2023-12-31
+modified: 2025-02-23
 ---
 
 # 文档标题
@@ -65,27 +66,23 @@ modified: 2023-12-31
 
 ## 配置选项
 
-- `type`: 日期类型（默认：`date`）
+- **type**: 日期类型（默认：`date`）
   - `date`: 仅显示日期
   - `datetime`: 显示日期和时间
   - `timeago`: 显示相对时间（例如：2 分钟前）
-- `locale`: 本地化语言（默认：`en`）
+- **locale**: 本地化语言（默认：`en`）
   - 支持： `zh zh_tw en es fr de ar ja ko ru`
-- `date_format`: 日期格式（默认 `%Y-%m-%d`）
+- **date_format**: 日期格式（默认 `%Y-%m-%d`）
   - 支持所有 Python datetime 格式化字符串，例如：%Y年%m月%d日、%b %d, %Y 等
-- `time_format`: 时间格式（默认：`%H:%M:%S`）
-- `position`: 显示位置（默认：`bottom`）
+- **time_format**: 时间格式（默认：`%H:%M:%S`）
+- **position**: 显示位置（默认：`bottom`）
   - `top`: 在文档第一个标题后显示
   - `bottom`: 在文档末尾显示
-- `exclude`: 排除文件列表（默认：[]）
+- **exclude**: 排除文件列表（默认：[]）
   - 支持 glob 模式，例如：["private/\*", "temp.md", "drafts/\*.md"]
 
 ## 注意事项
 
-- 创建时间在不同操作系统上的行为可能不同：
-  - Windows: 使用文件创建时间
-  - macOS: 使用文件创建时间（birthtime）
-  - Linux: 由于系统限制，使用修改时间作为创建时间，如果需要准确的创建时间，可在 Front Matter 手动指定
 - 在使用 CI/CD 构建系统时（如 Github Actions），它仍然有效
   - 使用缓存文件 `.dates_cache.json` 解决了这个问题
   - 你可以这么配置：
@@ -95,3 +92,4 @@ modified: 2023-12-31
       - run: pip install mkdocs-document-dates
       - run: mkdocs gh-deploy --force
     ```
+- 如果你是在 Linux 系统下使用 MkDocs ，因为系统限制，则使用修改时间作为创建时间，如果需要准确的创建时间，可在 Front Matter 手动指定
