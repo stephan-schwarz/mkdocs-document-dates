@@ -31,7 +31,7 @@ setup(
             'document-dates = mkdocs_document_dates.plugin:DocumentDatesPlugin',
         ],
         'console_scripts': [
-            # 提供命令行工具，允许用户手动执行 hooks 安装
+            # 提供手动执行 hooks 安装的入口
             'mkdocs-document-dates-hooks=mkdocs_document_dates.hooks_installer:install'
         ],
     },
