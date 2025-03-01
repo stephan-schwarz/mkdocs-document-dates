@@ -171,15 +171,15 @@ class DocumentDatesPlugin(BasePlugin):
             # 如果缓存不存在或文件不在缓存中，使用文件系统时间
             stat = os.stat(file_path)
             modified = datetime.fromtimestamp(stat.st_mtime)
-            
+
             system = platform.system().lower()
-            if system == 'darwin':  # macOS
+            if system.startswith('win'):  # Windows
+                created = datetime.fromtimestamp(stat.st_ctime)
+            elif system == 'darwin':  # macOS
                 try:
                     created = datetime.fromtimestamp(stat.st_birthtime)
                 except AttributeError:
                     created = datetime.fromtimestamp(stat.st_ctime)
-            elif system == 'windows':  # Windows
-                created = datetime.fromtimestamp(stat.st_ctime)
             else:  # Linux 和其他系统
                 created = modified
 
