@@ -42,47 +42,20 @@ def install():
             return False
 
         try:
-            if platform.system().lower().startswith('win'):
-                # Windows 系统: 复制为 .py 文件
-                py_hook_path = hook_path.with_suffix('.py')
-                shutil.copy2(source_hook, py_hook_path)
-                
-                # 创建批处理文件作为入口
-                bat_hook_path = hook_path.with_suffix('.bat')
-                python_path = sys.executable
-                with open(bat_hook_path, 'w') as f:
-                    f.write('@echo off\n')
-                    f.write('setlocal\n')
-                    f.write('set ERRORLEVEL=\n')
-                    # 1. 使用安装插件时的 Python 解释器路径
-                    f.write(f'"{python_path}" "{py_hook_path}" %*\n')
-                    f.write('if %ERRORLEVEL% EQU 0 goto :eof\n')
-                    # 2. 尝试 python3 命令
-                    f.write('python3 "%~dp0pre-commit.py" %*\n')
-                    f.write('if %ERRORLEVEL% EQU 0 goto :eof\n')
-                    # 3. 尝试 python 命令
-                    f.write('python "%~dp0pre-commit.py" %*\n')
-                    f.write('if %ERRORLEVEL% EQU 0 goto :eof\n')
-                    # 4. 最后尝试 py 启动器
-                    f.write('py -3 "%~dp0pre-commit.py" %*\n')
-                    f.write('if %ERRORLEVEL% EQU 0 goto :eof\n')
-                    # 如果所有方式都失败，返回最后一次的错误码
-                    f.write('exit /b %ERRORLEVEL%\n')
-                
-                # Windows 下设置文件权限
-                os.chmod(py_hook_path, 0o755)
-                os.chmod(bat_hook_path, 0o755)
-            else:
-                # Unix-like 系统: 使用无扩展名文件
-                shutil.copy2(source_hook, hook_path)
-                os.chmod(config_dir, 0o755)
-                os.chmod(hook_path, 0o755)
+            shutil.copy2(source_hook, hook_path)
         except PermissionError:
             print(f"错误: 无权限复制文件到: {hook_path}")
             return False
         except Exception as e:
             print(f"错误: 复制文件失败, 原因: {e}")
             return False
+
+        # 设置文件权限
+        try:
+            os.chmod(config_dir, 0o755)
+            os.chmod(hook_path, 0o755)
+        except OSError as e:
+            print(f"警告: 设置权限时出错: {e}")
 
         # 配置全局 git hooks 路径
         try:
