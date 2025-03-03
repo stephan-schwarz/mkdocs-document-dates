@@ -85,7 +85,7 @@ modified: 2025-02-23
 
 - 在使用 CI/CD 构建系统时（如 Github Actions），它仍然有效
   - 使用了缓存文件 `.dates_cache.json` 来解决这个问题
-  - 你可以这么配置：
+  - 你可以这么配置（第3行），在你的 .github/workflows/ci.yml 中：
     
     ```
     ...
@@ -93,6 +93,7 @@ modified: 2025-02-23
       - run: pip install mkdocs-document-dates
       - run: mkdocs gh-deploy --force
     ```
+  - 然后正常的更新你的 MkDocs 项目里的 Markdown 文档，执行 mkdocs build 等命令或直接 git add、commit、push 即可
 - 时间读取的优先级：
   - `Front Matter` > `缓存文件` > `文件系统时间戳` 
 - 如果你是在 Linux 系统下使用 MkDocs ，因为系统限制，使用修改时间作为创建时间，如果需要准确的创建时间，可在 Front Matter 手动指定
