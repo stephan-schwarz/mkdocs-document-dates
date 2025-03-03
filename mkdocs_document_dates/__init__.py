@@ -1,6 +1,6 @@
 """MkDocs Document Dates Plugin."""
 
-__version__ = '2.2.0'
+__version__ = '2.3.0'
 
 from .hooks_installer import install
 
