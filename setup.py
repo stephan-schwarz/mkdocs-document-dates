@@ -38,5 +38,5 @@ setup(
     package_data={
         'mkdocs_document_dates': ['hooks/*'],
     },
-    python_requires=">=3.6",
+    python_requires=">=3.7",
 )
