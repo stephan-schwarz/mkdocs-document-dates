@@ -83,18 +83,19 @@ modified: 2025-02-23
 
 ## 注意事项
 
-- 在使用 CI/CD 构建系统时（如 Github Actions），它仍然有效
-  - 使用了缓存文件 `.dates_cache.json` 来解决这个问题
-  - 你可以这么配置，在你的 .github/workflows/ci.yml 中：
+- 在使用 CI/CD 构建系统时（比如 Github Actions）它仍然有效，使用了缓存文件 `.dates_cache.json` 来解决这个问题
+    1. 首先，你可以这么配置工作流（倒数第二行），在你的 .github/workflows/ci.yml 中：
     
     ```
     ...
     
-      - run: pip install mkdocs-document-dates
-      - run: mkdocs gh-deploy --force
+        - run: pip install mkdocs-document-dates
+        - run: mkdocs gh-deploy --force
     ```
-  - 然后正常的更新你的 MkDocs 项目里的 Markdown 文档，执行 mkdocs build 等命令或直接 git add、commit、push 即可
-    - 确保已经提前安装了 python3 且设置了环境变量
+    2. 然后正常的更新 MkDocs 中的 Markdown 文档
+    3. 执行 git add、git commit 后，就能在 MkDocs 下的 docs 文件夹中，看到自动生成的缓存文件 `.dates_cache.json`（默认是隐藏的）
+        - 确保已经提前安装了 python3 且设置了环境变量
+    4. 最后，执行 git push，就可以看到 GitHub 仓库中 docs 目录下也存在 `.dates_cache.json` 文件，即表示成功
 - 时间读取的优先级：
-  - `Front Matter` > `缓存文件` > `文件系统时间戳` 
+    - `Front Matter` > `缓存文件` > `文件系统时间戳` 
 - 如果你是在 Linux 系统下使用 MkDocs ，因为系统限制，使用修改时间作为创建时间，如果需要准确的创建时间，可在 Front Matter 手动指定

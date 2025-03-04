@@ -85,18 +85,19 @@ modified: 2025-02-23
 
 ## Notes
 
-- It still works when using CI/CD build systems (e.g. Github Actions)
-  - Used a cache file `.dates_cache.json` to solve this problem
-  - You can configure it like this in your .github/workflows/ci.yml:
+- It still works when using CI/CD build systems (e.g. Github Actions), used a cache file `.dates_cache.json` to solve this problem
+    1. First, you can configure the workflow like this (penultimate line) in your .github/workflows/ci.yml
     
     ```
     ...
     
-      - run: pip install mkdocs-document-dates
-      - run: mkdocs gh-deploy --force
+        - run: pip install mkdocs-document-dates
+        - run: mkdocs gh-deploy --force
     ```
-  - Then update your Markdown files in MkDocs as normal, execute commands such as mkdocs build or directly git add, commit, and push
-    - Make sure you have installed python3 ahead of time and set environment variables
+    2. Then update your Markdown document in MkDocs as normal
+    3. After running git add and git commit, you will see the auto-generated cache file .dates_cache.json (hidden by default) in the `docs` folder under MkDocs
+        - Make sure you have installed python3 ahead of time and set environment variables
+    4. Finally, run git push, and you can see that there are also .dates_cache.json files in the docs directory in the GitHub repository, which means success
 - Priority of time reads:
-  - `Front Matter` > `Cache file` > `Filesystem timestamp`
+    - `Front Matter` > `Cache file` > `Filesystem timestamp`
 - If you are using MkDocs on a Linux system, the modification time is used as the creation time because of system limitations. If you need the exact creation time, you can specify it manually in Front Matter
