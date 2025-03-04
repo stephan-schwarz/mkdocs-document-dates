@@ -2,7 +2,6 @@ from pathlib import Path
 import importlib.util
 
 def load_translations():
-    """加载所有可用的翻译"""
     translations = {}
     translations_dir = Path(__file__).parent
     

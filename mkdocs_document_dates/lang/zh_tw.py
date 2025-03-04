@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 translations = {
     'just_now': '剛剛',
     'seconds_ago': '{} 秒前',

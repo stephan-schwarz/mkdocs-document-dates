@@ -1,4 +1,3 @@
-"""CSS 样式定义"""
 
 DOCUMENT_DATES_CSS = """
 .document-dates-plugin {

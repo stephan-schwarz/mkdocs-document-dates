@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 translations = {
     'just_now': 'только что',
     'seconds_ago': '{} секунд назад',

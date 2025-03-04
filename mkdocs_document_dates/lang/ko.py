@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 translations = {
     'just_now': '방금',
     'seconds_ago': '{} 초 전',

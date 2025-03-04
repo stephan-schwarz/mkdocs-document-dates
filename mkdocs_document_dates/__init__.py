@@ -1,6 +1,6 @@
 """MkDocs Document Dates Plugin."""
 
-__version__ = '2.3.0'
+__version__ = '2.3.1'
 
 from .hooks_installer import install
 
@@ -8,6 +8,6 @@ from .hooks_installer import install
 try:
     result = install()
     if not result:
-        print("提示: Git hooks 安装被跳过（可能是因为未检测到 Git 或不在 Git 仓库中）")
+        print("Tip: Git hooks installation was skipped (probably because Git was not detected or not in the Git repository)")
 except Exception as e:
-    print(f"警告: Git hooks 安装失败: {e}")
+    print(f"Warning: Git hooks installation failed: {e}")

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 translations = {
     'just_now': 'à l\'instant',
     'seconds_ago': 'il y a {} secondes',
