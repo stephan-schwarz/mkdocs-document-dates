@@ -61,7 +61,7 @@ def install():
         try:
             subprocess.run(['git', 'config', '--global', 'core.hooksPath', 
                           str(config_dir)], check=True, encoding='utf-8')
-            # print(f"Git hooks 已安装到: {config_dir}")
+            print(f"Git hooks 已安装到: {config_dir}")
             return True
         except subprocess.CalledProcessError as e:
             print(f"错误: 设置 git hooks 路径失败: {e}")
