@@ -50,7 +50,6 @@ def get_file_dates(file_path):
 
 def update_dates_cache():
     """更新文档时间缓存"""
-    # print("开始更新文档时间缓存...")
     for project_dir in find_mkdocs_projects():
         docs_dir = project_dir / 'docs'
         if not docs_dir.exists():
@@ -75,7 +74,6 @@ def update_dates_cache():
             continue
 
         cache_file = docs_dir / '.dates_cache.json'
-        # print(f"正在写入缓存文件: {cache_file}")
         try:
             with open(cache_file, "w") as f:
                 json.dump(dates_cache, f, indent=2, ensure_ascii=False)

@@ -9,7 +9,7 @@ def get_config_dir():
     """获取用户配置目录"""
     if platform.system().lower().startswith('win'):
         return Path(os.getenv('APPDATA', str(Path.home() / 'AppData' / 'Roaming')))
-    else:  # macOS 和 Linux 统一使用 ~/.config
+    else:
         return Path.home() / '.config'
 
 def install():
