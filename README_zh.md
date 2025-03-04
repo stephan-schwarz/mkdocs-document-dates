@@ -83,7 +83,7 @@ modified: 2025-02-23
 
 ## 注意事项
 
-- 在使用 CI/CD 构建系统时（比如 Github Actions）它仍然有效，使用了缓存文件 `.dates_cache.json` 来解决这个问题
+- 在使用 CI/CD 构建系统时（比如 Github Actions）它仍然有效，使用了缓存文件 `.dates_cache.json` 来解决这个问题：
     1. 首先，你可以这么配置工作流（倒数第二行），在你的 .github/workflows/ci.yml 中：
     
     ```
