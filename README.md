@@ -87,7 +87,7 @@ modified: 2025-02-23
 
 - It still works when using CI/CD build systems (e.g. Github Actions)
   - Used a cache file `.dates_cache.json` to solve this problem
-  - You can configure it like this (line 3) in your .github/workflows/ci.yml:
+  - You can configure it like this in your .github/workflows/ci.yml:
     
     ```
     ...
