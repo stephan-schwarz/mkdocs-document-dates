@@ -96,6 +96,7 @@ modified: 2025-02-23
       - run: mkdocs gh-deploy --force
     ```
   - Then update your Markdown files in MkDocs as normal, execute commands such as mkdocs build or directly git add, commit, and push
+    - Make sure you have installed python3 ahead of time and set environment variables
 - Priority of time reads:
   - `Front Matter` > `Cache file` > `Filesystem timestamp`
 - If you are using MkDocs on a Linux system, the modification time is used as the creation time because of system limitations. If you need the exact creation time, you can specify it manually in Front Matter
