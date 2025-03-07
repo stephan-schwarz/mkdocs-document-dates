@@ -51,9 +51,9 @@ class DocumentDatesPlugin(BasePlugin):
         return (
             f"<div class='document-dates-plugin-wrapper'>"
             f"<div class='document-dates-plugin'>"
-            f"<span title='{t['created_time']}'><span class='material-icons'>add_circle</span>"
+            f"<span title='{t['created_time']}: {created.strftime(self.config['date_format'])}'><span class='material-icons'>add_circle</span>"
             f"{self._get_formatted_date(created)}</span>"
-            f"<span title='{t['modified_time']}'><span class='material-icons'>update</span>"
+            f"<span title='{t['modified_time']}: {modified.strftime(self.config['date_format'])}'><span class='material-icons'>update</span>"
             f"{self._get_formatted_date(modified)}</span>"
             f"</div>"
             f"</div>"
