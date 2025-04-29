@@ -74,7 +74,7 @@ class DocumentDatesPlugin(BasePlugin):
                     return '\n'.join(lines)
                 else:
                     lines.insert(0, date_info)
-                    return '\n'.join(lines)                
+                    return lines
             return f"{date_info}\n{markdown}"
         return f"{markdown}\n\n{date_info}"
 
