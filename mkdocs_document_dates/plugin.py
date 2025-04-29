@@ -39,7 +39,7 @@ class DocumentDatesPlugin(BasePlugin):
         #css_file = Path(config['docs_dir']) / 'assets' / 'document_dates.css'
         css_file = Path(config['docs_dir']) / self.config['css_file_path'].lstrip('/')
         if not css_file.exists():
-        css_file.parent.mkdir(parents=True, exist_ok=True)
+            css_file.parent.mkdir(parents=True, exist_ok=True)
             css_file.write_text(self._get_css_content())
         config['extra_css'].append(str(css_file_path))
         
