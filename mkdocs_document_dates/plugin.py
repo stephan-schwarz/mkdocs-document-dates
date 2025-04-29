@@ -15,6 +15,7 @@ class DocumentDatesPlugin(BasePlugin):
         ('date_format', config_options.Type(str, default='%Y-%m-%d')),
         ('time_format', config_options.Type(str, default='%H:%M:%S')),
         ('position', config_options.Type(str, default='bottom')),
+        ('css_file_path', config_options.Type(str, default='/assets/document_dates.css')),
         ('exclude', config_options.Type(list, default=[])),
     )
 
@@ -35,10 +36,12 @@ class DocumentDatesPlugin(BasePlugin):
             config['extra_css'].append(material_icons_url)
         
         # 添加自定义 CSS
-        css_file = Path(config['docs_dir']) / 'assets' / 'document_dates.css'
+        #css_file = Path(config['docs_dir']) / 'assets' / 'document_dates.css'
+        css_file = Path(config['docs_dir']) / self.config['css_file_path'].lstrip('/')
+        if not css_file.exists():
         css_file.parent.mkdir(parents=True, exist_ok=True)
-        css_file.write_text(self._get_css_content())
-        config['extra_css'].append('assets/document_dates.css')
+            css_file.write_text(self._get_css_content())
+        config['extra_css'].append(str(css_file_path))
         
         return config
 
