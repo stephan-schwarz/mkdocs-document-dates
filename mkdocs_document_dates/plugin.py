@@ -69,11 +69,11 @@ class DocumentDatesPlugin(BasePlugin):
         if self.config['position'] == 'top':
             lines = markdown.splitlines()
             for i, line in enumerate(lines):
-                if line.startswith('#'):
-                    lines.insert(i + 1, date_info)
-                    return '\n'.join(lines)
-                elif line.startswith('##'):
+                if line.startswith('##'):
                     lines.insert(i - 1, date_info)
+                    return '\n'.join(lines)
+                elif line.startswith('#'):
+                    lines.insert(i + 1, date_info)
                     return '\n'.join(lines)
             return f"{date_info}\n{markdown}"
         return f"{markdown}\n\n{date_info}"
